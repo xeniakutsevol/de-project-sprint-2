@@ -1,5 +1,5 @@
 -- create datamart
-drop view shipping_datamart;
+drop view if exists shipping_datamart;
 create or replace view shipping_datamart as
 select
 i.shipping_id,
@@ -17,11 +17,11 @@ i.payment_amount*(scr.shipping_country_base_rate+sa.agreement_rate+st.shipping_t
 i.payment_amount*sa.agreement_commission as profit
 from public.shipping_info i
 join public.shipping_transfer st
-on i.transfer_type_id = st.transfer_type_id
+on i.transfer_type_id = st.id
 join public.shipping_status ss
 on i.shipping_id = ss.shipping_id
 join public.shipping_country_rates scr
-on i.shipping_country_id = scr.shipping_country_id
+on i.shipping_country_id = scr.id
 join public.shipping_agreement sa
 on i.agreement_id = sa.agreement_id;
 

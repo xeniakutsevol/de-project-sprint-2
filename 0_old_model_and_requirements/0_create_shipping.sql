@@ -11,7 +11,7 @@ CREATE TABLE public.shipping(
    saleid                             BIGINT,
    orderid                            BIGINT,
    clientid                           BIGINT,
-   payment_amount                          NUMERIC(14,2),
+   payment                          NUMERIC(14,2),
    state_datetime                    TIMESTAMP,
    productid                          BIGINT,
    description                       text,

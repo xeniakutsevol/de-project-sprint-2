@@ -59,8 +59,8 @@ s.shippingid as shipping_id,
 s.vendorid as vendor_id,
 s.payment as payment_amount,
 s.shipping_plan_datetime,
-t.transfer_type_id,
-c.shipping_country_id,
+t.id as transfer_type_id,
+c.id as shipping_country_id,
 a.agreement_id
 from public.shipping s
 join public.shipping_transfer t
@@ -71,7 +71,7 @@ join public.shipping_country_rates c
 on s.shipping_country = c.shipping_country
 join public.shipping_agreement a
 on (regexp_split_to_array(s.vendor_agreement_description, E'\\:+'))[1]::bigint = a.agreement_id
-group by s.shippingid, s.vendorid, s.payment, s.shipping_plan_datetime, t.transfer_type_id, c.shipping_country_id, a.agreement_id;
+group by s.shippingid, s.vendorid, s.payment, s.shipping_plan_datetime, t.id, c.id, a.agreement_id;
 
 -- check public.shipping_info
 select count(*) from (select distinct shippingid from public.shipping) q;

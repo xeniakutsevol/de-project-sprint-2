@@ -8,10 +8,10 @@ drop table if exists public.shipping_transfer;
 
 -- create tables
 create table public.shipping_country_rates(
-shipping_country_id serial4,
+id serial4,
 shipping_country text,
 shipping_country_base_rate numeric(14,3),
-primary key (shipping_country_id)
+primary key (id)
 );
 
 create table public.shipping_agreement(
@@ -23,11 +23,11 @@ primary key (agreement_id)
 );
 
 create table public.shipping_transfer(
-transfer_type_id serial4,
+id serial4,
 transfer_type text,
 transfer_model text,
 shipping_transfer_rate numeric(14,3),
-primary key (transfer_type_id)
+primary key (id)
 );
 
 create table public.shipping_info(
@@ -39,8 +39,8 @@ transfer_type_id bigint,
 shipping_country_id bigint,
 agreement_id bigint,
 primary key (shipping_id),
-foreign key (transfer_type_id) references  public.shipping_transfer(transfer_type_id) on update cascade,
-foreign key (shipping_country_id) references  public.shipping_country_rates(shipping_country_id) on update cascade,
+foreign key (transfer_type_id) references  public.shipping_transfer(id) on update cascade,
+foreign key (shipping_country_id) references  public.shipping_country_rates(id) on update cascade,
 foreign key (agreement_id) references  public.shipping_agreement(agreement_id) on update cascade
 );
 
